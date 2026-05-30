@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Formador Junior · Recursos pedagógicos digitales para formación de adultos</title>
+  <meta
+    name="description"
+    content="El Formador Junior es un proyecto personal de recursos pedagógicos digitales reutilizables para formación de adultos, con foco en claridad, privacidad, accesibilidad práctica y tecnología ligera."
+  />
+  <meta name="theme-color" content="#1e3a5f" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --ink: #1a1a1a;
+      --ink-soft: #4a4a4a;
+      --ink-muted: #727272;
+      --rule: #d8d4cc;
+      --bg: #f5f2ed;
+      --bg-card: #faf8f5;
+      --white: #ffffff;
+      --accent: #1e3a5f;
+      --accent-2: #c8510a;
+      --focus: #7c6ee6;
+      --max: 920px;
+      --pad: clamp(1.25rem, 5vw, 2.5rem);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      font-size: clamp(0.96rem, 2vw, 1.04rem);
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
+    }
+
+    a:hover {
+      color: var(--accent-2);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0.75rem;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      z-index: 999;
+    }
+
+    .skip-link:focus {
+      left: 1rem;
+    }
+
+    .topbar {
+      border-bottom: 1px solid var(--rule);
+      background: rgba(245, 242, 237, 0.94);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0.85rem var(--pad);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 750;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--bg-card);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+
+    .topbar-nav {
+      display: flex;
+      gap: 1.2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .topbar-nav a {
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .topbar-nav a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      min-height: 70vh;
+    }
+
+    .hero,
+    .section,
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding-left: var(--pad);
+      padding-right: var(--pad);
+    }
+
+    .hero {
+      padding-top: clamp(3.3rem, 9vw, 6rem);
+      padding-bottom: clamp(2.4rem, 6vw, 4rem);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .kicker,
+    .section-label {
+      font-size: 0.76rem;
+      font-weight: 750;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin: 0 0 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .kicker::before {
+      content: "";
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background: var(--accent-2);
+    }
+
+    .section-label {
+      color: var(--ink-muted);
+      margin-bottom: 1.6rem;
+    }
+
+    .section-label::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: var(--rule);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--accent);
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0 0 1.4rem;
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 7vw, 4.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    h1 em {
+      color: var(--accent-2);
+      font-style: italic;
+    }
+
+    h2 {
+      margin: 0 0 1rem;
+      font-family: var(--serif);
+      font-size: clamp(1.55rem, 4vw, 2.15rem);
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+    }
+
+    h3 {
+      margin: 0 0 0.55rem;
+      font-size: 1.05rem;
+      line-height: 1.3;
+    }
+
+    h4 {
+      margin: 0 0 0.25rem;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    p {
+      margin-top: 0;
+      color: var(--ink-soft);
+    }
+
+    .hero-lead {
+      max-width: 680px;
+      font-size: clamp(1.05rem, 2.2vw, 1.18rem);
+      color: var(--ink-soft);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem 1.1rem;
+      margin: 0 0 1.8rem;
+      padding: 0;
+      list-style: none;
+      font-size: 0.84rem;
+      color: var(--ink-muted);
+    }
+
+    .hero-meta li::before {
+      content: "·";
+      margin-right: 0.5rem;
+      color: var(--accent-2);
+      font-weight: 800;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.4rem;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 44px;
+      padding: 0.78rem 1rem;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background: #152c49;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--rule);
+    }
+
+    .button.secondary:hover {
+      background: var(--bg-card);
+      color: var(--accent);
+    }
+
+    .section {
+      padding-top: clamp(2.5rem, 6vw, 4.2rem);
+      padding-bottom: clamp(2.5rem, 6vw, 4.2rem);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .intro-grid,
+    .author-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.7rem;
+    }
+
+    .line-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 1.7rem;
+      border: 1px solid var(--rule);
+      background: var(--rule);
+    }
+
+    .card,
+    .line-card,
+    .resource-card,
+    .notice {
+      background: var(--bg-card);
+      border: 1px solid var(--rule);
+    }
+
+    .card {
+      padding: 1.35rem;
+    }
+
+    .line-card {
+      padding: 1.35rem;
+      border: 0;
+    }
+
+    .line-card-wide {
+      grid-column: 1 / -1;
+    }
+
+    .line-num,
+    .resource-code,
+    .tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 0.55rem;
+    }
+
+    .line-card p,
+    .resource-card p,
+    .card p {
+      margin-bottom: 0;
+    }
+
+    .resource-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.7rem;
+    }
+
+    .resource-card {
+      padding: 1.45rem;
+    }
+
+    .resource-card.available {
+      border-left: 4px solid var(--accent);
+    }
+
+    .resource-top {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 0.8rem;
+    }
+
+    .tag {
+      color: var(--accent);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      margin-bottom: 0;
+      white-space: nowrap;
+    }
+
+    .tag.muted {
+      color: var(--ink-muted);
+    }
+
+    .author-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: 1.2rem;
+    }
+
+    .author-links a {
+      width: fit-content;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .stack-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-left: 2px solid var(--rule);
+      padding-left: 1.3rem;
+    }
+
+    .stack-list li {
+      margin-bottom: 1rem;
+      color: var(--ink-soft);
+    }
+
+    .stack-list strong {
+      display: block;
+      color: var(--ink-muted);
+      font-size: 0.73rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.15rem;
+    }
+
+    .notice {
+      border-left: 4px solid var(--accent-2);
+      padding: 1.35rem;
+    }
+
+    .notice p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      padding-top: 2rem;
+      padding-bottom: 2.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-brand {
+      font-family: var(--serif);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero > * {
+        animation: fade-up 0.55s ease both;
+      }
+
+      .hero > *:nth-child(2) { animation-delay: 0.06s; }
+      .hero > *:nth-child(3) { animation-delay: 0.12s; }
+      .hero > *:nth-child(4) { animation-delay: 0.18s; }
+      .hero > *:nth-child(5) { animation-delay: 0.24s; }
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .topbar-nav {
+        gap: 0.75rem 1rem;
+        justify-content: flex-start;
+      }
+
+      .intro-grid,
+      .author-grid,
+      .line-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .topbar-nav {
+        display: none;
+      }
+
+      .resource-top {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Inicio de El Formador Junior">
+        <span class="brand-mark" aria-hidden="true">EFJ</span>
+        <span>El Formador Junior</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <ul class="topbar-nav">
+          <li><a href="#proyecto">Proyecto</a></li>
+          <li><a href="#lineas">Líneas</a></li>
+          <li><a href="#recursos">Recursos</a></li>
+          <li><a href="#autor">Autor</a></li>
+          <li><a href="#aviso">Aviso</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="titulo-principal">
+      <p class="kicker">Recursos pedagógicos digitales</p>
+      <h1 id="titulo-principal">El Formador <em>Junior</em></h1>
+      <p class="hero-lead">
+        Materiales prácticos, reutilizables y técnicamente ligeros para la formación de personas adultas.
+        Claridad docente, documentación ordenada, privacidad desde el diseño y uso responsable de IA.
+      </p>
+
+      <ul class="hero-meta" aria-label="Ámbitos principales del proyecto">
+        <li>Formación de adultos</li>
+        <li>FPE</li>
+        <li>Competencias digitales</li>
+        <li>Idiomas básicos</li>
+        <li>Empleabilidad</li>
+      </ul>
+
+      <div class="actions">
+        <a class="button" href="#recursos">Ver recurso piloto</a>
+        <a class="button secondary" href="https://github.com/elformadorjunior" target="_blank" rel="noopener">Organización en GitHub</a>
+      </div>
+    </section>
+
+    <section class="section" id="proyecto" aria-labelledby="proyecto-titulo">
+      <p class="section-label">El proyecto</p>
+      <h2 id="proyecto-titulo">Qué es El Formador Junior</h2>
+      <p>
+        El Formador Junior es un proyecto personal de Joel Concepción Villanueva orientado al diseño,
+        documentación y publicación progresiva de recursos pedagógicos digitales reutilizables para personas adultas.
+      </p>
+      <p>
+        No pretende ser una plataforma cerrada ni sustituir la función docente. Su foco es crear materiales de apoyo:
+        herramientas interactivas, guías, plantillas, rúbricas, microlecciones y recursos de práctica que puedan
+        adaptarse a distintos contextos formativos.
+      </p>
+
+      <div class="intro-grid">
+        <article class="card">
+          <h3>Para qué sirve</h3>
+          <p>
+            Como portfolio técnico-docente, catálogo inicial de recursos y evidencia verificable de una forma de trabajar:
+            transformar necesidades formativas concretas en materiales claros, prácticos y reutilizables.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Cómo está construido</h3>
+          <p>
+            Con tecnología ligera siempre que sea posible: recursos estáticos, uso directo desde navegador,
+            documentación en repositorio y ausencia de recogida innecesaria de datos personales.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="lineas" aria-labelledby="lineas-titulo">
+      <p class="section-label">Contenidos</p>
+      <h2 id="lineas-titulo">Líneas de trabajo</h2>
+      <p>
+        El proyecto se organiza por líneas temáticas para crecer sin perder coherencia. No todas están desarrolladas al mismo nivel.
+      </p>
+
+      <div class="line-grid">
+        <article class="line-card">
+          <span class="line-num">Línea 01</span>
+          <h3>Idiomas básicos para adultos</h3>
+          <p>Recursos de apoyo para niveles iniciales, especialmente A1 y A2.</p>
+        </article>
+
+        <article class="line-card">
+          <span class="line-num">Línea 02</span>
+          <h3>Competencias digitales</h3>
+          <p>Correo, archivos, formularios, seguridad, privacidad y herramientas web útiles.</p>
+        </article>
+
+        <article class="line-card">
+          <span class="line-num">Línea 03</span>
+          <h3>IA aplicada al aprendizaje</h3>
+          <p>Prompts, guías y actividades para usar IA como apoyo, no como sustituto del criterio humano.</p>
+        </article>
+
+        <article class="line-card">
+          <span class="line-num">Línea 04</span>
+          <h3>Empleabilidad</h3>
+          <p>CV, cartas, entrevistas, competencias profesionales y búsqueda de empleo.</p>
+        </article>
+
+        <article class="line-card">
+          <span class="line-num">Línea 05</span>
+          <h3>Formación docente FPE</h3>
+          <p>Plantillas, rúbricas, bancos de preguntas, instrumentos de evaluación y fichas didácticas.</p>
+        </article>
+
+        <article class="line-card">
+          <span class="line-num">Línea 06</span>
+          <h3>Educación financiera para adultos</h3>
+          <p>Presupuesto, ahorro, deuda, riesgo y toma de decisiones prudente con finalidad educativa.</p>
+        </article>
+
+        <article class="line-card line-card-wide">
+          <span class="line-num">Línea 07</span>
+          <h3>Ciencias, datos y pensamiento crítico</h3>
+          <p>Método científico, lectura básica de datos, evaluación de fuentes y pensamiento crítico aplicado.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="recursos" aria-labelledby="recursos-titulo">
+      <p class="section-label">Catálogo</p>
+      <h2 id="recursos-titulo">Recursos publicados y previstos</h2>
+      <p>
+        Cada recurso debe documentar su objetivo, público destinatario, estado, privacidad, licencia y forma de reutilización.
+      </p>
+
+      <div class="resource-list">
+        <article class="resource-card available">
+          <div class="resource-top">
+            <div>
+              <span class="resource-code">EFJ-001 · Disponible</span>
+              <h3>Repaso Final Francés A1 · Kit interactivo</h3>
+            </div>
+            <span class="tag">Recurso piloto</span>
+          </div>
+          <p>
+            Herramienta de repaso y autoevaluación formativa para alumnado adulto de nivel inicial. Funciona sin backend,
+            sin login y sin envío de respuestas a servidores externos.
+          </p>
+          <div class="actions">
+            <a class="button" href="https://viconjoe.github.io/repaso-frances-a1-fpe/" target="_blank" rel="noopener">Abrir recurso</a>
+            <a class="button secondary" href="https://github.com/viconjoe/repaso-frances-a1-fpe" target="_blank" rel="noopener">Ver repositorio</a>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-top">
+            <div>
+              <span class="resource-code">EFJ-002 · En preparación</span>
+              <h3>Cómo usar IA para estudiar sin copiar</h3>
+            </div>
+            <span class="tag muted">Guía breve</span>
+          </div>
+          <p>
+            Recurso previsto para la línea de IA aplicada al aprendizaje y al trabajo.
+          </p>
+        </article>
+
+        <article class="resource-card">
+          <div class="resource-top">
+            <div>
+              <span class="resource-code">EFJ-003 · Planificado</span>
+              <h3>Checklist de CV antes de enviarlo</h3>
+            </div>
+            <span class="tag muted">Empleabilidad</span>
+          </div>
+          <p>
+            Recurso previsto para apoyar la revisión de candidaturas, claridad documental y preparación profesional.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="autor" aria-labelledby="autor-titulo">
+      <p class="section-label">Quién lo desarrolla</p>
+      <h2 id="autor-titulo">Joel Concepción Villanueva</h2>
+
+      <div class="author-grid">
+        <div>
+          <h3>Perfil</h3>
+          <p>
+            Profesional científico-digital en transición hacia la docencia de Formación Profesional para el Empleo,
+            con base en Bioquímica, competencias digitales y orientación al diseño de recursos formativos claros,
+            prácticos y reutilizables para personas adultas.
+          </p>
+          <p>
+            El Formador Junior funciona como línea de portfolio técnico-docente. El Inversor Junior se mantiene como
+            vertical específica de educación financiera para adultos dentro de una arquitectura más amplia.
+          </p>
+
+          <div class="author-links" aria-label="Enlaces profesionales">
+            <a href="https://www.linkedin.com/in/viconjoe" target="_blank" rel="noopener">LinkedIn · Joel Concepción Villanueva</a>
+            <a href="https://github.com/elformadorjunior" target="_blank" rel="noopener">GitHub · elformadorjunior</a>
+            <a href="https://github.com/viconjoe" target="_blank" rel="noopener">GitHub · viconjoe</a>
+            <a href="https://elinversorjunior.com" target="_blank" rel="noopener">El Inversor Junior</a>
+          </div>
+        </div>
+
+        <aside aria-label="Resumen de competencias">
+          <ul class="stack-list">
+            <li><strong>Línea profesional</strong> Recursos pedagógicos digitales para formación de adultos.</li>
+            <li><strong>Base académica</strong> Bioquímica, método, análisis y pensamiento crítico.</li>
+            <li><strong>Competencias digitales</strong> GitHub, GitHub Pages, HTML, CSS, JavaScript, WordPress e IA aplicada.</li>
+            <li><strong>Enfoque</strong> Claridad pedagógica, tecnología ligera, documentación y privacidad desde el diseño.</li>
+            <li><strong>Ubicación</strong> Canarias, España.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="aviso" aria-labelledby="aviso-titulo">
+      <p class="section-label">Aviso</p>
+      <h2 id="aviso-titulo">Límites de uso</h2>
+      <div class="notice">
+        <p>
+          <strong>El Formador Junior es un proyecto personal de portfolio técnico-docente.</strong>
+          Sus recursos son materiales complementarios para formación de adultos. No son recursos oficiales de ICSE,
+          del Servicio Canario de Empleo ni de ninguna entidad formativa, salvo autorización expresa para usos concretos.
+        </p>
+        <p>
+          Los recursos no sustituyen programaciones oficiales, materiales docentes ni evaluación formal. Los contenidos de
+          educación financiera tienen finalidad educativa y no constituyen asesoramiento financiero.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="footer-brand">El Formador Junior</span>
+    <span>Proyecto personal de Joel Concepción Villanueva · 2026</span>
+  </footer>
+</body>
+</html>
